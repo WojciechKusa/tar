@@ -116,6 +116,15 @@ def main(task, results_file, qrel_file):
         agg_tar.finalize()
         agg_tar.print_scores()
 
+        results_dict = {}
+        for measure_type in agg_tar.agg_tar_ruler.measures:
+            for measure in measure_type.outputs.keys():
+                val = getattr(measure_type, measure)
+                results_dict[measure] = val
+
+        return results_dict
+
+
 def usage(args):
     print("Usage: {0} <task> <qrel_file> <results_file>".format(args[0]))
     print("<task> is either 1 or 2")
