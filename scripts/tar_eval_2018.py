@@ -126,14 +126,14 @@ def main(task, results_file, qrel_file):
                     maxt = 100
                     cg_max = getattr(measure_type, "cg_max")
                     percent = 0
-                    for i in range(0, maxt):
+                    for i in range(maxt):
                         x = 0.0
                         if cg_max > 0.0:
                             x = round(float(cgat_values[i]) / float(cg_max), 3)
 
                         if i-1 in thresholds:
                             value = x
-                            results_dict[f"recall@{i}%"] = value
+                            results_dict[f"recall@{i-1}%"] = value
                         percent += (100 / maxt)
                 else:
                     val = getattr(measure_type, measure)
