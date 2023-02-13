@@ -1,5 +1,6 @@
 __author__ = "Leif Azzopardi"
 
+from tar.scripts.measures.eval_measures import CostBasedMeasure
 from tar.scripts.measures.eval_measures_2018 import UtilityBasedMeasure, AreaBasedMeasures, MAPBasedMeasures
 from tar.scripts.measures.eval_measures_2018 import DescriptionMeasures, CountBasedMeasures, GainBasedMeasures
 from tar.scripts.measures.eval_measures_2018 import LossBasedMeasures, RecallBasedMeasures
@@ -138,4 +139,7 @@ class TarRulerTask2(TarRuler):
                           UtilityBasedMeasure(topic_id, num_docs, num_rels),
                           AreaBasedMeasures(topic_id, num_docs, num_rels),
                           MAPBasedMeasures(topic_id, num_docs, num_rels),
-                          LossBasedMeasures(topic_id, num_docs, num_rels)]
+                          LossBasedMeasures(topic_id, num_docs, num_rels),
+                          CostBasedMeasure(topic_id, num_docs, num_rels),
+                          # RecallBasedMeasures(topic_id, num_docs, num_rels)
+                          ]

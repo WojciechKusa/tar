@@ -119,8 +119,25 @@ def main(task, results_file, qrel_file):
         results_dict = {}
         for measure_type in agg_tar.agg_tar_ruler.measures:
             for measure in measure_type.outputs.keys():
-                val = getattr(measure_type, measure)
-                results_dict[measure] = val
+                if measure == "cgat":
+                    thresholds = [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                    cgat_values: list[float] = getattr(measure_type, measure)
+
+                    maxt = 100
+                    cg_max = getattr(measure_type, "cg_max")
+                    percent = 0
+                    for i in range(0, maxt):
+                        x = 0.0
+                        if cg_max > 0.0:
+                            x = round(float(cgat_values[i]) / float(cg_max), 3)
+
+                        if i-1 in thresholds:
+                            value = x
+                            results_dict[f"recall@{i}%"] = value
+                        percent += (100 / maxt)
+                else:
+                    val = getattr(measure_type, measure)
+                    results_dict[measure] = val
 
         return results_dict
 
